@@ -1,0 +1,21 @@
+{
+  "name": "mitirrli/yunpian",
+  "description": "A Yunpian SDK.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "mitirrli",
+      "email": "512663808@qq.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Mitirrli\\YunPian\\": "./src/"
+    }
+  },
+  "require": {
+    "guzzlehttp/guzzle": "^6.3",
+    "phpunit/phpunit": "^8.3",
+    "mockery/mockery": "^1.2"
+  }
+}
