@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the mitirrli/YunPian1
+ * This file is part of the mitirrli/YunPian
  *
  * (c) mitirrli <512663808@qq.com>
  *
