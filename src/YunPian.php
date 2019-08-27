@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the mitirrli/YunPian
+ * This file is part of the mitirrli/YunPian1
  *
  * (c) mitirrli <512663808@qq.com>
  *
@@ -18,7 +18,9 @@ use Mitirrli\YunPian\Exceptions\HttpException;
 class YunPian
 {
     protected $key;
+
     protected $tpl_id;
+
     protected $guzzleOptions = [];
 
     /**
@@ -51,7 +53,9 @@ class YunPian
      *
      * @param $code int 验证码
      * @param $mobile int 手机号
+     *
      * @return mixed|string
+     *
      * @throws HttpException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
@@ -61,7 +65,7 @@ class YunPian
 
         $query = [
             'tpl_id' => $this->tpl_id,
-            'tpl_value' => urlencode('#code#') . '=' . urlencode($code), 'apikey' => $this->key, 'mobile' => $mobile,
+            'tpl_value' => urlencode('#code#').'='.urlencode($code), 'apikey' => $this->key, 'mobile' => $mobile,
         ];
 
         try {
@@ -74,5 +78,4 @@ class YunPian
             throw new HttpException($e->getMessage(), $e->getCode());
         }
     }
-
 }
