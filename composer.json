@@ -14,8 +14,6 @@
     }
   },
   "require": {
-    "guzzlehttp/guzzle": "^6.3",
-    "phpunit/phpunit": "^8.3",
-    "mockery/mockery": "^1.2"
+    "guzzlehttp/guzzle": "^6.3"
   }
 }
