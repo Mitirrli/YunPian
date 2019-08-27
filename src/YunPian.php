@@ -67,7 +67,7 @@ class YunPian
 
         $query = [
             'tpl_id' => $this->tpl_id,
-            'tpl_value' => urlencode('#code#') . '=' . urlencode($code), 'apikey' => $this->key, 'mobile' => $mobile,
+            'tpl_value' => urlencode('#code#').'='.urlencode($code), 'apikey' => $this->key, 'mobile' => $mobile,
         ];
 
         try {
