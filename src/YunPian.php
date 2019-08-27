@@ -75,7 +75,7 @@ class YunPian
                 ->request('POST', $url, ['form_params' => $query])
                 ->getBody()->getContents();
 
-            return \GuzzleHttp\json_encode($response, true);
+            return \GuzzleHttp\json_decode($response, true);
         } catch (\Exception $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
