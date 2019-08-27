@@ -24,6 +24,9 @@ class YunPian
 
     /**
      * YunPian constructor.
+     *
+     * @param $key string appKey
+     * @param $tpl_id string 模板id
      */
     public function __construct($key, $tpl_id)
     {
@@ -64,7 +67,7 @@ class YunPian
 
         $query = [
             'tpl_id' => $this->tpl_id,
-            'tpl_value' => urlencode('#code#').'='.urlencode($code), 'apikey' => $this->key, 'mobile' => $mobile,
+            'tpl_value' => urlencode('#code#') . '=' . urlencode($code), 'apikey' => $this->key, 'mobile' => $mobile,
         ];
 
         try {
@@ -72,7 +75,7 @@ class YunPian
                 ->request('POST', $url, ['form_params' => $query])
                 ->getBody()->getContents();
 
-            return \json_decode($response, true);
+            return \GuzzleHttp\json_encode($response, true);
         } catch (\Exception $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
