@@ -11,7 +11,6 @@
 
 namespace Mitirrli\YunPian;
 
-use GuzzleHttp\Client;
 use Mitirrli\YunPian\Exceptions\HttpException;
 
 class YunPian
@@ -19,8 +18,6 @@ class YunPian
     protected $key;
 
     protected $tpl_id;
-
-    protected $guzzleOptions = [];
 
     /**
      * YunPian constructor.
@@ -32,22 +29,6 @@ class YunPian
     {
         $this->key = $key;
         $this->tpl_id = $tpl_id;
-    }
-
-    /**
-     * @return Client
-     */
-    public function getHttpClient()
-    {
-        return new Client($this->guzzleOptions);
-    }
-
-    /**
-     * @param array $options
-     */
-    public function setGuzzleOptions(array $options)
-    {
-        $this->guzzleOptions = $options;
     }
 
     /**
@@ -63,6 +44,8 @@ class YunPian
      */
     public function sendCode($code, $mobile)
     {
+        $CURL = curl_init();
+        
         $url = 'https://sms.yunpian.com/v1/sms/tpl_send.json';
 
         $query = [
@@ -71,11 +54,18 @@ class YunPian
         ];
 
         try {
-            $response = $this->getHttpClient()
-                ->request('POST', $url, ['form_params' => $query])
-                ->getBody()->getContents();
+            $options = [
+                CURLOPT_URL => 'https://sms.yunpian.com/v1/sms/tpl_send.json',
+                CURLOPT_TIMEOUT => 10,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_POSTFIELDS => http_build_query($query),
+            ];
+            curl_setopt_array($CURL, $options);
 
-            return \GuzzleHttp\json_decode($response, true);
+            $result = curl_exec($CURL);
+            curl_close($CURL);
+            
+            return json_decode($result)->msg == 'OK';
         } catch (\Exception $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
