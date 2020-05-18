@@ -37,10 +37,9 @@ class YunPian
      * @param $code int 验证码
      * @param $mobile int 手机号
      *
-     * @return mixed|string
+     * @return bool
      *
      * @throws HttpException
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function sendCode($code, $mobile)
     {
