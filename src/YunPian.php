@@ -11,8 +11,6 @@
 
 namespace Mitirrli\YunPian;
 
-use Mitirrli\YunPian\Exceptions\HttpException;
-
 class YunPian
 {
     protected $key;
@@ -33,40 +31,30 @@ class YunPian
 
     /**
      * 发送短信验证码
-     *
-     * @param $code int 验证码
-     * @param $mobile int 手机号
-     *
-     * @return bool
-     *
-     * @throws HttpException
+     * @param int $code 验证码
+     * @param int $mobile 手机号
+     * @return mixed
      */
-    public function sendCode($code, $mobile)
+    public function sendCode(int $code, int $mobile)
     {
-        $url = 'https://sms.yunpian.com/v1/sms/tpl_send.json';
+        $CURL = curl_init();
 
         $query = [
             'tpl_id' => $this->tpl_id,
             'tpl_value' => urlencode('#code#').'='.urlencode($code), 'apikey' => $this->key, 'mobile' => $mobile,
         ];
 
-        try {
-            $CURL = curl_init();
-            
-            $options = [
-                CURLOPT_URL => 'https://sms.yunpian.com/v1/sms/tpl_send.json',
-                CURLOPT_TIMEOUT => 10,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_POSTFIELDS => http_build_query($query),
-            ];
-            curl_setopt_array($CURL, $options);
+        $options = [
+            CURLOPT_URL => 'https://sms.yunpian.com/v1/sms/tpl_send.json',
+            CURLOPT_TIMEOUT => 10,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POSTFIELDS => http_build_query($query),
+        ];
+        curl_setopt_array($CURL, $options);
 
-            $result = curl_exec($CURL);
-            curl_close($CURL);
-            
-            return json_decode($result)->msg == 'OK';
-        } catch (\Exception $e) {
-            throw new HttpException($e->getMessage(), $e->getCode());
-        }
+        $result = curl_exec($CURL);
+        curl_close($CURL);
+
+        return json_decode($result);
     }
 }
