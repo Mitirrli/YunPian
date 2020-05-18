@@ -45,7 +45,7 @@ class YunPian
     public function sendCode($code, $mobile)
     {
         $CURL = curl_init();
-        
+
         $url = 'https://sms.yunpian.com/v1/sms/tpl_send.json';
 
         $query = [
@@ -64,8 +64,8 @@ class YunPian
 
             $result = curl_exec($CURL);
             curl_close($CURL);
-            
-            return json_decode($result)->msg == 'OK';
+
+            return 'OK' == json_decode($result)->msg;
         } catch (\Exception $e) {
             throw new HttpException($e->getMessage(), $e->getCode());
         }
