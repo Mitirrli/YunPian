@@ -31,8 +31,10 @@ class YunPian
 
     /**
      * 发送短信验证码
-     * @param int $code 验证码
+     *
+     * @param int $code   验证码
      * @param int $mobile 手机号
+     *
      * @return mixed
      */
     public function sendCode(int $code, int $mobile)
