@@ -44,8 +44,6 @@ class YunPian
      */
     public function sendCode($code, $mobile)
     {
-        $CURL = curl_init();
-        
         $url = 'https://sms.yunpian.com/v1/sms/tpl_send.json';
 
         $query = [
@@ -54,6 +52,8 @@ class YunPian
         ];
 
         try {
+            $CURL = curl_init();
+            
             $options = [
                 CURLOPT_URL => 'https://sms.yunpian.com/v1/sms/tpl_send.json',
                 CURLOPT_TIMEOUT => 10,
